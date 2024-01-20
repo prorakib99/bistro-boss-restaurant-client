@@ -56,7 +56,7 @@ const Header = () => {
                                         </Link>
                                     </div>
                                     <div className='hidden lg:block'>
-                                        <div className='flex items-center gap-3'>
+                                        <div className='flex items-center gap-5'>
                                             {navigation.map((item) => (
                                                 <NavLink
                                                     key={item.name}
