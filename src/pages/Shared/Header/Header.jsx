@@ -29,12 +29,12 @@ const Header = () => {
                             <div className='relative flex items-center justify-between'>
                                 <div className='absolute inset-y-0 left-0 flex items-center lg:hidden'>
                                     {/* Mobile menu button*/}
-                                    <Disclosure.Button className='relative inline-flex items-center justify-center rounded-md p-2 text-white bg-gray-700 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
+                                    <Disclosure.Button className='relative inline-flex items-center justify-center rounded-md px-2 py-1 text-white bg-gray-700 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'>
                                         <span className='absolute -inset-0.5' />
                                         <span className='sr-only'>Open main menu</span>
                                         {open ? (
                                             <XMarkIcon
-                                                className='block h-7 w-7'
+                                                className='block h-8 w-8'
                                                 aria-hidden='true'
                                             />
                                         ) : (
@@ -75,7 +75,7 @@ const Header = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
+                                <div className='absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto sm:ml-6 sm:pr-0'>
                                     <button className='bg-[#006837] relative p-[5px] rounded-full border border-[#F7931E]'>
                                         <TiShoppingCart className='text-white text-3xl' />
                                         <span className='absolute -bottom-2'>
