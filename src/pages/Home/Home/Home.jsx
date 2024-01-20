@@ -1,4 +1,5 @@
 import Banner from '../Banner/Banner';
+import BistroBoss from '../BistroBoss/BistroBoss';
 import OrderOnline from '../OrdersOnline/OrdersOnline';
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
         <>
             <Banner />
             <OrderOnline />
+            <BistroBoss />
         </>
     );
 };
