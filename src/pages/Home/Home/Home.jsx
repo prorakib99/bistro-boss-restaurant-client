@@ -4,6 +4,7 @@ import CallUs from '../CallUs/CallUs';
 import ChefRecommends from '../ChefRecommends/ChefRecommends';
 import OrderOnline from '../OrdersOnline/OrdersOnline';
 import OurMenuOne from '../OurMenuOne/OurMenuOne';
+import OurMenuTwo from '../OurMenuTwo/OurMenuTwo';
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             <OurMenuOne />
             <CallUs />
             <ChefRecommends />
+            <OurMenuTwo />
         </>
     );
 };
