@@ -21,7 +21,7 @@ const Header = () => {
     }
 
     return (
-        <header className='fixed z-50 w-full'>
+        <header className='z-50 w-full'>
             <Disclosure as='nav' className='bg-neutral-900 bg-opacity-50 py-6'>
                 {({ open }) => (
                     <>

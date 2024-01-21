@@ -1,12 +1,12 @@
 const MenuItem = ({ item }) => {
-    const { _id, name, recipe, image, price, category } = item;
+    const { name, recipe, image, price } = item;
     return (
         <div className='flex gap-4 sm:gap-7 items-center'>
-            <div className='w-[118px] max-h-[104px] max-w-full h-full'>
+            <div className='min-w-[118px] max-h-[104px] max-w-full h-full'>
                 <img
                     className='w-full h-full bg-zinc-300 rounded-tr-[200px] rounded-bl-[200px] rounded-br-[200px]'
                     src={image}
-                    alt=''
+                    alt={name}
                 />
             </div>
             <div className='flex gap-2 sm:gap-3'>

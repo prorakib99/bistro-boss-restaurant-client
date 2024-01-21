@@ -1,7 +1,7 @@
 const PageCover = ({ img, title, subTitle }) => {
     return (
         <section
-            className='bg-cover pt-[130px] pb-[50px] sm:pt-[200px] sm:pb-[100px] px-5'
+            className='bg-cover py-[50px] md:py-[100px] lg:pt-[200px] px-5'
             style={{ backgroundImage: `url(${img})` }}
         >
             <div className='container mx-auto px-5'>
