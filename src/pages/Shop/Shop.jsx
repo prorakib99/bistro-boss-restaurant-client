@@ -1,6 +1,6 @@
 import shopBg from '../../assets/shop/banner2.jpg';
 import { Tab, TabIndicator, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
-import FoodCard from '../Home/ChefRecommends/FoodCard/FoodCard';
+import FoodCard from '../Shared/FoodCard/FoodCard';
 import PageCover from '../Shared/PageCover/PageCover';
 import { Helmet } from 'react-helmet-async';
 

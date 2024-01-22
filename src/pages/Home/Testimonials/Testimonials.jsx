@@ -18,7 +18,6 @@ const Testimonials = () => {
             .then((data) => setReviews(data));
     }, []);
 
-    console.log(reviews);
     return (
         <section className='container mx-auto px-5 py-16'>
             <SectionTitles subTitle='What Our Clients Say' title='TESTIMONIALS' />

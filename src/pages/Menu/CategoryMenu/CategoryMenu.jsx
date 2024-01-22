@@ -15,7 +15,7 @@ const CategoryMenu = ({ categoryName, img, title }) => {
                         <MenuItem key={item._id} item={item} />
                     ))}
                 </div>
-                <MoreButton text='ORDER YOUR FAVOURITE FOOD' />
+                <MoreButton text='ORDER YOUR FAVORITE FOOD' />
             </div>
         </section>
     );
