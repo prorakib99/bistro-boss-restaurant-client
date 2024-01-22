@@ -1,16 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import MenuItem from '../../Shared/MenuItem/MenuItem';
 import SectionTitles from '../../Shared/SectionTitles/SectionTitles';
 import MoreButton from '../../Shared/MoreButton/MoreButton';
+import { useFoods } from '../../../hooks/useFoods';
+import { useFoodCount } from '../../../hooks/useFoodsCount';
 
 const OurMenuOne = () => {
-    const [foods, setFoods] = useState([]);
+    const [foodsLimit, setFoodsLimit] = useState(6);
+    const [foods, isLoading] = useFoods(foodsLimit);
+    const [totalFoods] = useFoodCount();
+    const [isDisabled, setIsDisabled] = useState(false);
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/category/popular`)
-            .then((res) => res.json())
-            .then((data) => setFoods(data));
-    }, []);
+    const handleLoadMore = () => {
+        if (totalFoods <= foodsLimit) {
+            return setIsDisabled(true);
+        }
+        setFoodsLimit(foodsLimit + 6);
+    };
+
     return (
         <section className='container mx-auto px-5 py-12 lg:py-20'>
             <SectionTitles subTitle='Check it out' title='FROM OUR MENU' />
@@ -19,7 +26,15 @@ const OurMenuOne = () => {
                     <MenuItem key={item._id} item={item} />
                 ))}
             </div>
-            <MoreButton text='View Full Menu' />
+            {isLoading ? (
+                'Loading'
+            ) : (
+                <MoreButton
+                    handleLoadMore={handleLoadMore}
+                    isDisabled={isDisabled}
+                    text='View Full Menu'
+                />
+            )}
         </section>
     );
 };

@@ -1,10 +1,12 @@
 import SectionTitles from '../../Shared/SectionTitles/SectionTitles';
 import FoodCard from '../../Shared/FoodCard/FoodCard';
-import { useFoods } from '../../../hooks/useFoods';
+import { useCategoryFoods } from '../../../hooks/useCategoryFoods';
 
 const ChefRecommends = () => {
-    const [foods, isLoading] = useFoods(3);
-    console.log(foods, isLoading);
+    const [foods, isLoading] = useCategoryFoods('popular', 3);
+
+    if (isLoading) return 'Loading';
+
     return (
         <section className='container mx-auto px-5 pt-20'>
             <SectionTitles subTitle='Should Try' title='CHEF RECOMMENDS' />

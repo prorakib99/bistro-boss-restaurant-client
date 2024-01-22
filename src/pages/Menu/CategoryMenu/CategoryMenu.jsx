@@ -5,7 +5,6 @@ import MenuCover from '../MenuCover/MenuCover';
 
 const CategoryMenu = ({ categoryName, img, title }) => {
     const [foods] = useCategoryFoods(categoryName);
-
     return (
         <section className='mb-10'>
             {title && <MenuCover img={img} title={title} />}

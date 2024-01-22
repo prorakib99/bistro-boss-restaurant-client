@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 
-export const useFoods = (limit) => {
-    const [foods, setFoods] = useState([]);
+export const useFoodCount = () => {
+    const [total, setTotal] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/foods${limit ? `?page=${limit}` : ''}`)
+        fetch(`http://localhost:5000/total`)
             .then((res) => res.json())
             .then((data) => {
-                setFoods(data);
+                setTotal(data.result);
                 setIsLoading(false);
             });
-    }, [limit]);
+    }, []);
 
-    return [foods, isLoading];
+    return [total, isLoading];
 };
