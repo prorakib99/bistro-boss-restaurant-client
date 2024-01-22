@@ -35,7 +35,7 @@ const Contact = () => {
         <div className='pb-16'>
             {/* Helmet */}
             <Helmet>
-                <title>Bistro Boss | Contact</title>
+                <title>Bistro Boss || Contact</title>
             </Helmet>
 
             <PageCover img={bgImg} title='CONTACT US' subTitle='Would you like to try a dish?' />
