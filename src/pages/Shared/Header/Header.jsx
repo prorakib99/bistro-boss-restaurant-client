@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import 'primereact/resources/themes/lara-light-cyan/theme.css';
@@ -6,14 +6,18 @@ import { Link, NavLink } from 'react-router-dom';
 import header_logo from '../../../assets/header-logo.png';
 import { TiShoppingCart } from 'react-icons/ti';
 import { Badge } from 'primereact/badge';
+import { AuthContext } from '../../../providers/AuthProvider';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext);
+
     const navigation = [
         { name: 'Home', to: '/' },
         { name: 'Contact Us', to: '/contact' },
         { name: 'Dashboard', to: '/dashboard' },
         { name: 'Our Menu', to: '/menu' },
         { name: 'Our Shop', to: '/shop/salad' },
+
         { name: 'Login', to: '/login' }
     ];
 
