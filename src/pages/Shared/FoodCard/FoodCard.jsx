@@ -1,8 +1,13 @@
-const FoodCard = ({ food }) => {
-    const { _id, recipe, price, name, image, category } = food;
+const FoodCard = ({ food, shop }) => {
+    const { _id, recipe, price, name, image } = food;
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col relative'>
             <img className='w-full h-[300px] object-cover' src={image} alt='' />
+            {shop && (
+                <p className="w-[89px] mr-5 mt-5 absolute right-0 h-12 flex items-center justify-center bg-gray-900 text-center text-white text-base font-semibold font-['Inter'] leading-relaxed">
+                    ${price}
+                </p>
+            )}
             <div className='bg-zinc-100 py-[30px] px-[40px]'>
                 <h2 className="text-center mb-[8px] text-neutral-900 text-xl sm:text-2xl font-semibold font-['Inter']">
                     {name}
