@@ -101,6 +101,19 @@ const Register = () => {
                             >
                                 Password
                             </label>
+                            <p className='absolute mr-3 right-0 top-12'>
+                                {show ? (
+                                    <FaEyeSlash
+                                        onClick={() => setShow(!show)}
+                                        className='text-[25px] cursor-pointer'
+                                    />
+                                ) : (
+                                    <FaEye
+                                        onClick={() => setShow(!show)}
+                                        className='text-2xl cursor-pointer'
+                                    />
+                                )}
+                            </p>
                             <input
                                 type={show ? 'text' : 'password'}
                                 {...register('password', {
@@ -114,19 +127,7 @@ const Register = () => {
                                 placeholder='Enter Your Password'
                                 className="w-full h-[50px] px-5 py-3 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300"
                             />
-                            <p className='absolute mr-3 mb-[14px] right-0 bottom-0'>
-                                {show ? (
-                                    <FaEyeSlash
-                                        onClick={() => setShow(!show)}
-                                        className='text-[25px] cursor-pointer'
-                                    />
-                                ) : (
-                                    <FaEye
-                                        onClick={() => setShow(!show)}
-                                        className='text-2xl cursor-pointer'
-                                    />
-                                )}
-                            </p>
+
                             {errors.password?.type === 'required' && (
                                 <span className='text-red-500'>Password field is required</span>
                             )}

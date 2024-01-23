@@ -2,7 +2,56 @@ import { Link } from 'react-router-dom';
 import bgImg from '../../assets/others/authentication.png';
 import authentication2 from '../../assets/others/authentication2.png';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+import { FaEye } from 'react-icons/fa';
+import { FaEyeSlash } from 'react-icons/fa';
+import {
+    loadCaptchaEnginge,
+    LoadCanvasTemplateNoReload,
+    validateCaptcha
+} from 'react-simple-captcha';
+import { useForm } from 'react-hook-form';
+import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+
 const Login = () => {
+    const [show, setShow] = useState(false);
+    const [buttonStatus, setButtonStatus] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [captchaStatus, setCaptchaStatus] = useState(false);
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm();
+
+    const captchaRef = useRef();
+
+    const handleCaptcha = () => {
+        const inputText = captchaRef.current.value;
+        if (inputText.length <= 5) {
+            return alert('Enter Captcha Text First');
+        }
+        console.log(inputText);
+        if (validateCaptcha(inputText) === true) {
+            toast.success('Captcha Successfully Matched');
+            setIsDisabled(false);
+            setCaptchaStatus(true);
+        } else {
+            setCaptchaStatus(false);
+            toast.error('Wrong Captcha Input');
+            captchaRef.current.value = '';
+        }
+    };
+
+    const onSubmit = (data) => {
+        setButtonStatus(true);
+        console.log(data);
+    };
+
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, []);
     return (
         <div
             style={{ backgroundImage: `url('${bgImg}')` }}
@@ -16,7 +65,7 @@ const Login = () => {
                     <h3 className="text-center text-neutral-900 text-2xl mb-5 lg:text-[40px] font-bold font-['Inter']">
                         Login
                     </h3>
-                    <form className='grid gap-4'>
+                    <form onSubmit={handleSubmit(onSubmit)} className='grid gap-4'>
                         <div className='flex gap-2 flex-col'>
                             <label
                                 htmlFor='email'
@@ -26,50 +75,91 @@ const Login = () => {
                             </label>
                             <input
                                 type='email'
+                                {...register('email', { required: true })}
                                 name='email'
                                 id='email'
                                 placeholder='Enter Email'
                                 className="w-full h-[50px] px-5 py-3 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300"
                             />
+                            {errors.email && (
+                                <span className='text-red-500'>Email field is required</span>
+                            )}
                         </div>
-                        <div className='flex gap-2 flex-col'>
+                        <div className='flex gap-2 relative flex-col'>
                             <label
                                 htmlFor='password'
                                 className="text-neutral-700 ps-1 text-lg font-semibold font-['Inter']"
                             >
                                 Password
                             </label>
+                            <p className='absolute mr-3 right-0 top-12'>
+                                {show ? (
+                                    <FaEyeSlash
+                                        onClick={() => setShow(!show)}
+                                        className='text-[25px] cursor-pointer'
+                                    />
+                                ) : (
+                                    <FaEye
+                                        onClick={() => setShow(!show)}
+                                        className='text-2xl cursor-pointer'
+                                    />
+                                )}
+                            </p>
                             <input
-                                type='password'
+                                type={show ? 'text' : 'password'}
+                                {...register('password', { required: true })}
                                 name='password'
                                 id='password'
                                 placeholder='Enter Your Password'
                                 className="w-full h-[50px] px-5 py-3 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300"
                             />
+                            {errors.password && (
+                                <span className='text-red-500'>Password field is required</span>
+                            )}
                         </div>
                         <div className='mt-2'>
-                            <p className="w-full h-[50px] px-5 py-2 mb-1 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300">
-                                U A g l u o
-                            </p>
-                            <button className="text-indigo-500 text-start ps-2 text-lg hover:text-indigo-700 font-semibold font-['Inter']">
+                            <div className="w-full h-[50px] py-2 mb-1 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300">
+                                <LoadCanvasTemplateNoReload />
+                            </div>
+                            <button
+                                type='button'
+                                onClick={() => loadCaptchaEnginge(6)}
+                                className="text-indigo-500 cursor-pointer text-start ps-2 text-lg hover:text-indigo-700 font-semibold font-['Inter']"
+                            >
                                 Reload Captcha
                             </button>
                         </div>
-                        <div className=''>
+                        <div className='relative'>
                             <input
                                 type='text'
+                                ref={captchaRef}
                                 name='captcha'
                                 id='captcha'
+                                disabled={captchaStatus}
                                 placeholder='Enter Captcha Text'
-                                className="w-full h-[50px] px-5 py-3 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300"
+                                className="w-full h-[50px] disabled:bg-slate-200 px-5 py-3 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300"
                             />
+                            <button
+                                type='button'
+                                onClick={handleCaptcha}
+                                disabled={captchaStatus}
+                                className='btn btn-outline disabled:hidden mt-2 mr-2 absolute right-0 pb-1 btn-sm font-bold'
+                            >
+                                Check
+                            </button>
                         </div>
                         <div className='mt-3'>
-                            <input
+                            <button
                                 type='submit'
-                                value='Sign In'
-                                className="w-full h-[50px] cursor-pointer duration-300 text-white text-xl font-bold font-['Inter'] bg-[#D1A054] hover:bg-[#ffb84e] hover:text-black bg-opacity-70 rounded-lg"
-                            />
+                                disabled={isDisabled}
+                                className="w-full h-[50px] cursor-pointer duration-300 text-xl font-bold font-['Inter'] bg-[#ffb84e] focus:bg-[#ffb84e] disabled:bg-slate-200 disabled:text-slate-500 text-black bg-opacity-70 rounded-lg flex items-center justify-center"
+                            >
+                                {buttonStatus ? (
+                                    <span className='loading loading-spinner loading-md'></span>
+                                ) : (
+                                    'Sign In'
+                                )}
+                            </button>
                         </div>
                     </form>
                     <div className="text-[#D1A054] text-center my-4 text-lg font-medium font-['Inter']">
