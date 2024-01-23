@@ -1,5 +1,5 @@
 import bgImg from '../../assets/others/authentication.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import authentication2 from '../../assets/others/authentication2.png';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 import { useContext, useState } from 'react';
@@ -8,11 +8,13 @@ import { useForm } from 'react-hook-form';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import Loader from '../Shared/Loader/Loader';
 
 const Register = () => {
     const [show, setShow] = useState(false);
-    const { user, createUser, updateUserProfile, logOut } = useContext(AuthContext);
+    const { user, createUser, loading, updateUserProfile, logOut } = useContext(AuthContext);
     const [buttonStatus, setButtonStatus] = useState(false);
+
     const navigate = useNavigate();
 
     const {
@@ -20,6 +22,12 @@ const Register = () => {
         handleSubmit,
         formState: { errors }
     } = useForm();
+
+    if (loading) {
+        return <Loader />;
+    } else if (user) {
+        return <Navigate to='/' replace={true}></Navigate>;
+    }
 
     const onSubmit = (data) => {
         setButtonStatus(true);
@@ -42,9 +50,6 @@ const Register = () => {
             });
     };
 
-    if (user) {
-        return navigate('/');
-    }
     return (
         <div
             style={{ backgroundImage: `url('${bgImg}')` }}

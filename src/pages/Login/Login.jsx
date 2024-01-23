@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import bgImg from '../../assets/others/authentication.png';
 import authentication2 from '../../assets/others/authentication2.png';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
@@ -13,6 +13,7 @@ import { useForm } from 'react-hook-form';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../providers/AuthProvider';
+import Loader from '../Shared/Loader/Loader';
 
 const Login = () => {
     const [show, setShow] = useState(false);
@@ -25,15 +26,20 @@ const Login = () => {
         formState: { errors }
     } = useForm();
 
-    const { loginUser } = useContext(AuthContext);
+    const { user, loginUser } = useContext(AuthContext);
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.pathname?.from || '/';
     const captchaRef = useRef();
 
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, []);
+
     const handleCaptcha = () => {
         const inputText = captchaRef.current.value;
-        if (inputText.length <= 5) {
+        if (inputText.length < 6) {
             return alert('Enter Captcha Text First');
         } else if (validateCaptcha(inputText) === true) {
             toast.success('Captcha Successfully Matched');
@@ -62,9 +68,10 @@ const Login = () => {
             });
     };
 
-    useEffect(() => {
-        loadCaptchaEnginge(6);
-    }, []);
+    if (user) {
+        return <Navigate to='/' replace={true}></Navigate>;
+    }
+
     return (
         <div
             style={{ backgroundImage: `url('${bgImg}')` }}
