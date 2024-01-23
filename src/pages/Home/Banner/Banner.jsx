@@ -38,24 +38,23 @@ const sliders = [
 
 const Banner = () => {
     return (
-        <div className=''>
-            <Carousel
-                autoPlay
-                interval={5000}
-                emulateTouch={true}
-                infiniteLoop={true}
-                useKeyboardArrows={true}
-                stopOnHover={true}
-                thumbWidth={100}
-                dynamicHeight={true}
-            >
-                {sliders.map((slider) => (
-                    <div key={slider.id}>
-                        <img className='xl:h-[90vh]' src={slider.img} />
-                    </div>
-                ))}
-            </Carousel>
-        </div>
+        <Carousel
+            autoPlay
+            interval={5000}
+            emulateTouch={true}
+            infiniteLoop={true}
+            useKeyboardArrows={true}
+            stopOnHover={true}
+            thumbWidth={100}
+            dynamicHeight={true}
+            className='custom-center'
+        >
+            {sliders.map((slider) => (
+                <div key={slider.id}>
+                    <img className='xl:h-[90vh]' src={slider.img} />
+                </div>
+            ))}
+        </Carousel>
     );
 };
 

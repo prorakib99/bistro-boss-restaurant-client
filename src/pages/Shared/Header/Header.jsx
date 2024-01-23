@@ -13,7 +13,8 @@ const Header = () => {
         { name: 'Contact Us', to: '/contact' },
         { name: 'Dashboard', to: '/dashboard' },
         { name: 'Our Menu', to: '/menu' },
-        { name: 'Our Shop', to: '/shop/salad' }
+        { name: 'Our Shop', to: '/shop/salad' },
+        { name: 'Login', to: '/login' }
     ];
 
     function classNames(...classes) {
@@ -21,7 +22,7 @@ const Header = () => {
     }
 
     return (
-        <header className=' z-50 w-full'>
+        <header className='absolute z-50 w-full'>
             <Disclosure as='nav' className='bg-neutral-900 bg-opacity-50 py-6'>
                 {({ open }) => (
                     <>

@@ -28,6 +28,7 @@ const Shop = () => {
 
     const handleCategoryFoods = (categoryName) => {
         setCategoryName(categoryName.toLowerCase());
+        setCurrentPage(1);
     };
 
     console.log(currentPage);

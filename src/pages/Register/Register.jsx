@@ -2,7 +2,10 @@ import bgImg from '../../assets/others/authentication.png';
 import { Link } from 'react-router-dom';
 import authentication2 from '../../assets/others/authentication2.png';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 const Register = () => {
+    const { user, createUser } = useContext(AuthContext);
     return (
         <div
             style={{ backgroundImage: `url('${bgImg}')` }}
