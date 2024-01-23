@@ -13,7 +13,6 @@ import { useForm } from 'react-hook-form';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../providers/AuthProvider';
-import Loader from '../Shared/Loader/Loader';
 
 const Login = () => {
     const [show, setShow] = useState(false);

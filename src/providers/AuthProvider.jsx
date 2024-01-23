@@ -4,6 +4,7 @@ import {
     getAuth,
     onAuthStateChanged,
     signInWithEmailAndPassword,
+    signInWithPopup,
     signOut,
     updateProfile
 } from 'firebase/auth';
@@ -33,6 +34,10 @@ const AuthProvider = ({ children }) => {
         });
     };
 
+    const socialLogin = (provider) => {
+        return signInWithPopup(auth, provider);
+    };
+
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
@@ -55,6 +60,7 @@ const AuthProvider = ({ children }) => {
         createUser,
         updateUserProfile,
         loginUser,
+        socialLogin,
         logOut
     };
     return (
