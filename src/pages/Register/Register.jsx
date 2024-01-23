@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 
 const Register = () => {
     const [show, setShow] = useState(false);
-    const { user, createUser, logOut } = useContext(AuthContext);
+    const { user, createUser, updateUserProfile, logOut } = useContext(AuthContext);
     const [buttonStatus, setButtonStatus] = useState(false);
     const navigate = useNavigate();
 
@@ -26,14 +26,14 @@ const Register = () => {
         createUser(data.email, data.password)
             .then((result) => {
                 const LoggedUser = result.user;
-                console.log(LoggedUser);
+                updateUserProfile(LoggedUser, data.name, data.photo);
+                setButtonStatus(false);
+                toast.success(`User Registered Successful`);
                 logOut()
                     .then(() => {
                         navigate('/login');
                     })
                     .catch((error) => console.log(error));
-                setButtonStatus(false);
-                toast.success(`User Registered Successful`);
             })
             .catch((error) => {
                 console.log(error);

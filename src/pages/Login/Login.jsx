@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import bgImg from '../../assets/others/authentication.png';
 import authentication2 from '../../assets/others/authentication2.png';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
@@ -10,30 +10,32 @@ import {
     validateCaptcha
 } from 'react-simple-captcha';
 import { useForm } from 'react-hook-form';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
     const [show, setShow] = useState(false);
     const [buttonStatus, setButtonStatus] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
     const [captchaStatus, setCaptchaStatus] = useState(false);
-
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm();
 
+    const { loginUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.pathname?.from || '/';
     const captchaRef = useRef();
 
     const handleCaptcha = () => {
         const inputText = captchaRef.current.value;
         if (inputText.length <= 5) {
             return alert('Enter Captcha Text First');
-        }
-        console.log(inputText);
-        if (validateCaptcha(inputText) === true) {
+        } else if (validateCaptcha(inputText) === true) {
             toast.success('Captcha Successfully Matched');
             setIsDisabled(false);
             setCaptchaStatus(true);
@@ -46,7 +48,18 @@ const Login = () => {
 
     const onSubmit = (data) => {
         setButtonStatus(true);
-        console.log(data);
+        loginUser(data.email, data.password)
+            .then((result) => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                toast.success(`${data?.email} Login Successful!`);
+                setButtonStatus(false);
+                navigate(from, { replace: true });
+            })
+            .catch((error) => {
+                toast.error(error.message);
+                setButtonStatus(false);
+            });
     };
 
     useEffect(() => {
@@ -117,36 +130,38 @@ const Login = () => {
                                 <span className='text-red-500'>Password field is required</span>
                             )}
                         </div>
-                        <div className='mt-2'>
-                            <div className="w-full h-[50px] py-2 mb-1 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300">
-                                <LoadCanvasTemplateNoReload />
+                        <div className='grid lg:grid-cols-2 mt-2 gap-5'>
+                            <div className=''>
+                                <div className="w-full h-[50px] py-2 mb-1 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300">
+                                    <LoadCanvasTemplateNoReload />
+                                </div>
+                                <button
+                                    type='button'
+                                    onClick={() => loadCaptchaEnginge(6)}
+                                    className="text-indigo-500 cursor-pointer text-start ps-2 text-lg hover:text-indigo-700 font-semibold font-['Inter']"
+                                >
+                                    Reload Captcha
+                                </button>
                             </div>
-                            <button
-                                type='button'
-                                onClick={() => loadCaptchaEnginge(6)}
-                                className="text-indigo-500 cursor-pointer text-start ps-2 text-lg hover:text-indigo-700 font-semibold font-['Inter']"
-                            >
-                                Reload Captcha
-                            </button>
-                        </div>
-                        <div className='relative'>
-                            <input
-                                type='text'
-                                ref={captchaRef}
-                                name='captcha'
-                                id='captcha'
-                                disabled={captchaStatus}
-                                placeholder='Enter Captcha Text'
-                                className="w-full h-[50px] disabled:bg-slate-200 px-5 py-3 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300"
-                            />
-                            <button
-                                type='button'
-                                onClick={handleCaptcha}
-                                disabled={captchaStatus}
-                                className='btn btn-outline disabled:hidden mt-2 mr-2 absolute right-0 pb-1 btn-sm font-bold'
-                            >
-                                Check
-                            </button>
+                            <div className='relative'>
+                                <input
+                                    type='text'
+                                    ref={captchaRef}
+                                    name='captcha'
+                                    id='captcha'
+                                    disabled={captchaStatus}
+                                    placeholder='Enter Captcha Text'
+                                    className="w-full h-[50px] disabled:bg-slate-200 px-5 py-3 text-neutral-800 text-lg font-normal font-['Inter'] bg-white rounded-lg border border-stone-300"
+                                />
+                                <button
+                                    type='button'
+                                    onClick={handleCaptcha}
+                                    disabled={captchaStatus}
+                                    className='btn btn-outline disabled:hidden mt-2 mr-2 absolute right-0 pb-[3px] btn-sm font-bold'
+                                >
+                                    Check
+                                </button>
+                            </div>
                         </div>
                         <div className='mt-3'>
                             <button
