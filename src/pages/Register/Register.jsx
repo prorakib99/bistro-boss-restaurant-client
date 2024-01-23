@@ -1,5 +1,5 @@
 import bgImg from '../../assets/others/authentication.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import authentication2 from '../../assets/others/authentication2.png';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 import { useContext, useState } from 'react';
@@ -7,10 +7,13 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const [show, setShow] = useState(false);
-    const { user, createUser } = useContext(AuthContext);
+    const { user, createUser, logOut } = useContext(AuthContext);
+    const [buttonStatus, setButtonStatus] = useState(false);
+    const navigate = useNavigate();
 
     const {
         register,
@@ -19,13 +22,29 @@ const Register = () => {
     } = useForm();
 
     const onSubmit = (data) => {
+        setButtonStatus(true);
         createUser(data.email, data.password)
             .then((result) => {
                 const LoggedUser = result.user;
                 console.log(LoggedUser);
+                logOut()
+                    .then(() => {
+                        navigate('/login');
+                    })
+                    .catch((error) => console.log(error));
+                setButtonStatus(false);
+                toast.success(`User Registered Successful`);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                toast.error(error.message);
+                setButtonStatus(false);
+            });
     };
+
+    if (user) {
+        return navigate('/');
+    }
     return (
         <div
             style={{ backgroundImage: `url('${bgImg}')` }}
@@ -146,11 +165,16 @@ const Register = () => {
                             )}
                         </div>
                         <div className='mt-3'>
-                            <input
+                            <button
                                 type='submit'
-                                value='Sign Up'
-                                className="w-full h-[50px] cursor-pointer duration-300 text-white text-xl font-bold font-['Inter'] bg-[#D1A054] hover:bg-[#ffb84e] hover:text-black bg-opacity-70 rounded-lg"
-                            />
+                                className="w-full h-[50px] cursor-pointer duration-300 text-white text-xl font-bold font-['Inter'] bg-[#D1A054] hover:bg-[#ffb84e] focus:bg-[#ffb84e] hover:text-black bg-opacity-70 rounded-lg flex items-center justify-center"
+                            >
+                                {buttonStatus ? (
+                                    <span className='loading loading-spinner loading-md'></span>
+                                ) : (
+                                    'Sign Up'
+                                )}
+                            </button>
                         </div>
                     </form>
                     <div className="text-[#D1A054] text-center my-4 text-lg font-medium font-['Inter']">
