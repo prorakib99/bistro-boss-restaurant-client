@@ -7,9 +7,12 @@ import header_logo from '../../../assets/header-logo.png';
 import { TiShoppingCart } from 'react-icons/ti';
 import { Badge } from 'primereact/badge';
 import { AuthContext } from '../../../providers/AuthProvider';
+import useCart from '../../../hooks/useCart';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
+
+    const [cart] = useCart();
 
     const navigation = [
         { name: 'Home', to: '/' },
@@ -91,7 +94,10 @@ const Header = () => {
                                             <button className='bg-[#006837] relative p-[5px] rounded-full border border-[#F7931E]'>
                                                 <TiShoppingCart className='text-white text-3xl' />
                                                 <span className='absolute -bottom-2'>
-                                                    <Badge value='0' severity='danger'></Badge>
+                                                    <Badge
+                                                        value={cart?.length || '0'}
+                                                        severity='danger'
+                                                    ></Badge>
                                                 </span>
                                             </button>
 

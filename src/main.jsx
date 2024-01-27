@@ -8,25 +8,30 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ChakraProvider } from '@chakra-ui/react';
 import AuthProvider from './providers/AuthProvider.jsx';
 import { ToastContainer } from 'react-toastify';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <AuthProvider>
             <HelmetProvider>
                 <ChakraProvider>
-                    <ToastContainer
-                        position='top-right'
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme='colored'
-                    />
-                    <RouterProvider router={router} />
+                    <QueryClientProvider client={queryClient}>
+                        <ToastContainer
+                            position='top-right'
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme='colored'
+                        />
+                        <RouterProvider router={router} />
+                    </QueryClientProvider>
                 </ChakraProvider>
             </HelmetProvider>
         </AuthProvider>
