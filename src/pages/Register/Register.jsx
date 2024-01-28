@@ -35,12 +35,25 @@ const Register = () => {
         createUser(data.email, data.password)
             .then((result) => {
                 const LoggedUser = result.user;
+
                 updateUserProfile(LoggedUser, data.name, data.photo);
                 setButtonStatus(false);
-                toast.success(`User Registered Successful`);
-                logOut()
-                    .then(() => {
-                        navigate('/login');
+                const savedUser = {
+                    name: data.name,
+                    email: data.email
+                };
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify(savedUser)
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        toast.success(`User Registered Successful`);
+                        logOut().then(() => {
+                            navigate('/login');
+                        });
                     })
                     .catch((error) => console.log(error));
             })

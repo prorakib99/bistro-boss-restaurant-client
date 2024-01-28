@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <>
             <Helmet>
-                <title>Bistro Boss || {user ? user.displayName : 'Home'}</title>
+                <title>{`Bistro Boss || ${user ? user?.displayName : 'Home'}`}</title>
             </Helmet>
             <Banner />
             <OrderOnline />

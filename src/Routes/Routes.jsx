@@ -13,6 +13,11 @@ import PaymentHistory from '../pages/Dashboard/Users/PaymentHistory/PaymentHisto
 import MyCarts from '../pages/Dashboard/Users/MyCarts/MyCarts';
 import AddReview from '../pages/Dashboard/Users/AddReview/AddReview';
 import MyBookings from '../pages/Dashboard/Users/MyBookings/MyBookings';
+import AdminHome from '../pages/Dashboard/Admin/AdminHome/AdminHome';
+import AddItems from '../pages/Dashboard/Admin/AddItems/AddItems';
+import ManageItems from '../pages/Dashboard/Admin/ManageItems/ManageItems';
+import ManageBookings from '../pages/Dashboard/Admin/ManageBookings/ManageBookings';
+import AllUsers from '../pages/Dashboard/Admin/AllUsers/AllUsers';
 
 export const router = createBrowserRouter([
     {
@@ -50,28 +55,48 @@ export const router = createBrowserRouter([
         element: <Dashboard />,
         children: [
             {
-                path: '/dashboard',
+                path: 'home',
                 element: <UserHome />
             },
             {
-                path: '/dashboard/reservation',
+                path: 'reservation',
                 element: <Reservation />
             },
             {
-                path: '/dashboard/history',
+                path: 'history',
                 element: <PaymentHistory />
             },
             {
-                path: '/dashboard/cart',
+                path: 'cart',
                 element: <MyCarts />
             },
             {
-                path: '/dashboard/review',
+                path: 'review',
                 element: <AddReview />
             },
             {
-                path: '/dashboard/booking',
+                path: 'booking',
                 element: <MyBookings />
+            },
+            {
+                path: 'admin/home',
+                element: <AdminHome />
+            },
+            {
+                path: 'admin/addItems',
+                element: <AddItems />
+            },
+            {
+                path: 'admin/manageItems',
+                element: <ManageItems />
+            },
+            {
+                path: 'admin/manageBookings',
+                element: <ManageBookings />
+            },
+            {
+                path: 'admin/allUsers',
+                element: <AllUsers />
             }
         ]
     }

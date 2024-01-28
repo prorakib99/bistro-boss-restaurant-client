@@ -14,8 +14,21 @@ const SocialLogin = () => {
     const handleSocialLogin = (provider) => {
         socialLogin(provider)
             .then((result) => {
-                console.log(result.user);
-                toast.success(`${result?.user?.email || ''} Login Successful!`);
+                const loggedUser = result.user;
+                const savedUser = {
+                    name: loggedUser.displayName,
+                    email: loggedUser.email
+                };
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify(savedUser)
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        toast.success(`${result?.user?.email || ''} Login Successful!`);
+                    });
             })
             .catch((error) => {
                 console.log(error);

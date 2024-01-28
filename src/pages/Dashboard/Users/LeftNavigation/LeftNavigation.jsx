@@ -1,7 +1,7 @@
 import { ImHome } from 'react-icons/im';
 import { NavLink } from 'react-router-dom';
-import { FaCalendarAlt, FaWallet } from 'react-icons/fa';
-import { IoCartSharp } from 'react-icons/io5';
+import { FaCalendarAlt, FaUsers, FaWallet } from 'react-icons/fa';
+import { IoCartSharp, IoRestaurant } from 'react-icons/io5';
 import { MdEmail, MdRateReview } from 'react-icons/md';
 import { MdOutlineShoppingBag } from 'react-icons/md';
 import { IoMenu } from 'react-icons/io5';
@@ -13,7 +13,7 @@ const userDashBoardMenu = [
         id: 1,
         name: 'User Home',
         icon: <ImHome className='text-3xl lg:text-2xl' />,
-        to: '/dashboard'
+        to: '/dashboard/home'
     },
     {
         id: 2,
@@ -47,6 +47,40 @@ const userDashBoardMenu = [
     }
 ];
 
+// Admin DashBoard Menus
+const adminDashBoardMenu = [
+    {
+        id: 1,
+        name: 'Admin Home',
+        icon: <ImHome className='text-4xl lg:text-2xl' />,
+        to: '/dashboard/admin/home'
+    },
+    {
+        id: 2,
+        name: 'add items',
+        icon: <IoRestaurant className='text-4xl lg:text-2xl' />,
+        to: '/dashboard/admin/addItems'
+    },
+    {
+        id: 3,
+        name: 'manage items',
+        icon: <IoMenu className='text-4xl lg:text-2xl' />,
+        to: '/dashboard/admin/manageItems'
+    },
+    {
+        id: 4,
+        name: 'Manage bookings',
+        icon: <MdOutlineShoppingBag className='text-4xl lg:text-2xl' />,
+        to: '/dashboard/admin/manageBookings'
+    },
+    {
+        id: 5,
+        name: 'all users',
+        icon: <FaUsers className='text-4xl lg:text-2xl' />,
+        to: '/dashboard/admin/allUsers'
+    }
+];
+
 // Home Menu
 const homeMenu = [
     {
@@ -75,7 +109,7 @@ const homeMenu = [
     }
 ];
 
-const LeftNavigation = () => {
+const LeftNavigation = ({ isAdmin }) => {
     return (
         <section className='bg-[#D1A054] py-[50px] px-[10px] sm:px-[15px] md:px-[25px]'>
             <div className=''>
@@ -96,27 +130,55 @@ const LeftNavigation = () => {
                 </div>
                 <div className='pt-[50px]'>
                     <ul className='flex flex-col items-center gap-6 lg:items-start'>
-                        {userDashBoardMenu.map((menu) => (
-                            <li key={menu.id}>
-                                <NavLink
-                                    to={menu.to}
-                                    className={({ isActive, isPending }) =>
-                                        isPending
-                                            ? 'pending'
-                                            : isActive
-                                            ? "text-white text-base font-bold font-['Cinzel flex gap-2 items-center"
-                                            : "text-neutral-900 text-base font-medium font-['Cinzel'] flex gap-2 items-center"
-                                    }
-                                >
-                                    <div className='flex items-center gap-3'>
-                                        <span>{menu.icon}</span>
-                                        <h4 className="hidden lg:block text-base font-['Cinzel']">
-                                            {menu.name}
-                                        </h4>
-                                    </div>
-                                </NavLink>
-                            </li>
-                        ))}
+                        {isAdmin ? (
+                            <>
+                                {adminDashBoardMenu.map((menu) => (
+                                    <li key={menu.id}>
+                                        <NavLink
+                                            to={menu.to}
+                                            className={({ isActive, isPending }) =>
+                                                isPending
+                                                    ? 'pending'
+                                                    : isActive
+                                                    ? "text-white text-base font-bold font-['Cinzel flex gap-2 items-center"
+                                                    : "text-neutral-900 text-base font-medium font-['Cinzel'] flex gap-2 items-center"
+                                            }
+                                        >
+                                            <div className='flex items-center gap-3'>
+                                                <span>{menu.icon}</span>
+                                                <h4 className="hidden lg:block text-base font-['Cinzel']">
+                                                    {menu.name}
+                                                </h4>
+                                            </div>
+                                        </NavLink>
+                                    </li>
+                                ))}
+                            </>
+                        ) : (
+                            <>
+                                {userDashBoardMenu.map((menu) => (
+                                    <li key={menu.id}>
+                                        <NavLink
+                                            to={menu.to}
+                                            className={({ isActive, isPending }) =>
+                                                isPending
+                                                    ? 'pending'
+                                                    : isActive
+                                                    ? "text-white text-base font-bold font-['Cinzel flex gap-2 items-center"
+                                                    : "text-neutral-900 text-base font-medium font-['Cinzel'] flex gap-2 items-center"
+                                            }
+                                        >
+                                            <div className='flex items-center gap-3'>
+                                                <span>{menu.icon}</span>
+                                                <h4 className="hidden lg:block text-base font-['Cinzel']">
+                                                    {menu.name}
+                                                </h4>
+                                            </div>
+                                        </NavLink>
+                                    </li>
+                                ))}
+                            </>
+                        )}
                     </ul>
                     <div className='my-6 border border-b'></div>
                     <ul className='flex flex-col items-center gap-6 lg:items-start'>
