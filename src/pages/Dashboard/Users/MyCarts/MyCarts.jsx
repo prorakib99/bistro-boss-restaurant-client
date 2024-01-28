@@ -72,7 +72,7 @@ const MyCarts = () => {
                             <div className='pt-7 overflow-x-auto'>
                                 <table className='table table-xs'>
                                     <thead>
-                                        <tr className='flex items-center bg-[#D1A054] justify-between py-5 px-10 rounded-tl-[15px] rounded-tr-[15px]'>
+                                        <tr className='flex items-center bg-[#D1A054] justify-between md:justify-around py-5 px-2 rounded-tl-[15px] rounded-tr-[15px]'>
                                             <th className="text-white text-start text-base font-semibold font-['Inter']">
                                                 #
                                             </th>

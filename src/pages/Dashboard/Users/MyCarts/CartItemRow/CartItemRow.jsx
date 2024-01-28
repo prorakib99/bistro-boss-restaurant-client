@@ -4,7 +4,7 @@ const CartItemRow = ({ item, index, onDelete }) => {
     const { image, name, price } = item;
 
     return (
-        <tr className='flex items-center justify-between lg:px-10 py-3 border-b sm:py-5'>
+        <tr className='flex items-center justify-between md:justify-around lg:px-10 py-3 border-b sm:py-5'>
             <td className='flex items-center gap-4 md:gap-10'>
                 <span className="text-center text-neutral-900 text-xl font-bold font-['Inter']">
                     {index + 1}
