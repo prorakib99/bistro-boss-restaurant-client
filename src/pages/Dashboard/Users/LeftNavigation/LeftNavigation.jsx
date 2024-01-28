@@ -1,4 +1,4 @@
-import { IoMdHome } from 'react-icons/io';
+import { ImHome } from 'react-icons/im';
 import { NavLink } from 'react-router-dom';
 import { FaCalendarAlt, FaWallet } from 'react-icons/fa';
 import { IoCartSharp } from 'react-icons/io5';
@@ -12,7 +12,7 @@ const userDashBoardMenu = [
     {
         id: 1,
         name: 'User Home',
-        icon: <IoMdHome className='text-4xl lg:text-2xl' />,
+        icon: <ImHome className='text-3xl lg:text-2xl' />,
         to: '/dashboard'
     },
     {
@@ -52,7 +52,7 @@ const homeMenu = [
     {
         id: 1,
         name: 'Home',
-        icon: <IoMdHome className='text-4xl lg:text-2xl' />,
+        icon: <ImHome className='text-4xl lg:text-2xl' />,
         to: '/'
     },
     {
@@ -77,7 +77,7 @@ const homeMenu = [
 
 const LeftNavigation = () => {
     return (
-        <section className='bg-[#D1A054] lg:w-[300px] max-w-full h-full lg:h-screen sticky left-0 top-0 py-[50px] px-[10px] sm:px-[15px] md:px-[25px]'>
+        <section className='bg-[#D1A054] py-[50px] px-[10px] sm:px-[15px] md:px-[25px]'>
             <div className=''>
                 <div className=''>
                     <div className='block lg:hidden'>
@@ -119,7 +119,7 @@ const LeftNavigation = () => {
                         ))}
                     </ul>
                     <div className='my-6 border border-b'></div>
-                    <ul className='flex flex-col gap-6'>
+                    <ul className='flex flex-col items-center gap-6 lg:items-start'>
                         {homeMenu.map((menu) => (
                             <li key={menu.id}>
                                 <NavLink

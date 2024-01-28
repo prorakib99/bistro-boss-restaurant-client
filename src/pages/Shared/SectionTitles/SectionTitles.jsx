@@ -1,6 +1,6 @@
 const SectionTitles = ({ title, subTitle, color }) => {
     return (
-        <div className='max-w-[424px] mx-auto text-center mb-5 space-y-3'>
+        <div className='max-w-[424px] w-full mx-auto text-center mb-5 space-y-3'>
             <h6 className="text-yellow-600 text-sm mb-4 md:text-xl font-normal font-['Inter']">
                 ---{subTitle}---
             </h6>
