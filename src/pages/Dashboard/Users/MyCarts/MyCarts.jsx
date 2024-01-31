@@ -7,9 +7,17 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import { Button } from 'primereact/button';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import Loader from '../../../Shared/Loader/Loader';
+import useAuth from '../../../../hooks/useAuth';
 
 const MyCarts = () => {
-    const [cart, refetch] = useCart();
+    const [cart, refetch, isLoading] = useCart();
+    const { loading } = useAuth();
+
+    console.log(cart);
+    if (isLoading || loading) {
+        return <Loader height='h-full' width='w-full' />;
+    }
 
     const totalPrice = cart.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.price;

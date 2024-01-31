@@ -4,12 +4,17 @@ import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 const SocialLogin = () => {
     const { socialLogin } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSocialLogin = (provider) => {
         socialLogin(provider)
@@ -28,6 +33,7 @@ const SocialLogin = () => {
                     .then((data) => {
                         console.log(data);
                         toast.success(`${result?.user?.email || ''} Login Successful!`);
+                        navigate(from, { replace: true });
                     });
             })
             .catch((error) => {

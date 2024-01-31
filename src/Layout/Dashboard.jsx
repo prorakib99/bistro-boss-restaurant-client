@@ -6,10 +6,10 @@ const Dashboard = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const isAdmin = true;
+    const isAdmin = false;
 
     useEffect(() => {
-        if (location.pathname === '/dashboard') {
+        if (location.pathname === '/dashboard' || location.pathname === '/dashboard/') {
             if (isAdmin) {
                 return navigate('/dashboard/admin/home');
             } else {

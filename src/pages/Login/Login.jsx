@@ -26,14 +26,12 @@ const Login = () => {
         formState: { errors }
     } = useForm();
 
-    const { user, loginUser } = useContext(AuthContext);
+    const { loginUser } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
     const captchaRef = useRef();
-
-    console.log(from);
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -70,9 +68,9 @@ const Login = () => {
             });
     };
 
-    if (user) {
-        return navigate('/');
-    }
+    // if (user) {
+    //     return navigate('/');
+    // }
 
     return (
         <>
