@@ -20,6 +20,7 @@ import ManageBookings from '../pages/Dashboard/Admin/ManageBookings/ManageBookin
 import AllUsers from '../pages/Dashboard/Admin/AllUsers/AllUsers';
 import PrivateRoute from '../providers/PrivateRoute';
 import AdminRoute from '../providers/AdminRoute';
+import UpdateItems from '../pages/Dashboard/Admin/UpdateItems/UpdateItems';
 
 export const router = createBrowserRouter([
     {
@@ -115,6 +116,15 @@ export const router = createBrowserRouter([
                         <ManageBookings />
                     </AdminRoute>
                 )
+            },
+            {
+                path: 'admin/updateItems/:id',
+                element: (
+                    <AdminRoute>
+                        <UpdateItems />
+                    </AdminRoute>
+                ),
+                loader: ({ params }) => fetch(`http://localhost:5000/foods/${params.id}`)
             },
             {
                 path: 'admin/allUsers',

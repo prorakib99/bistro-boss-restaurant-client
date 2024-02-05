@@ -60,7 +60,7 @@ const AddItems = () => {
             </Helmet>
             <SectionTitles subTitle="What's new?" title='ADD AN ITEM' />
 
-            <section className='md:px-10 xl:px-20'>
+            <section className='md:px-10 xl:px-20 mb-10'>
                 <MenuItemForm
                     onAddItem={onSubmit}
                     register={register}

@@ -93,7 +93,11 @@ const MenuItemForm = ({
                 {update ? (
                     <div className='text-center'>
                         <button className="bg-gradient-to-r from-yellow-800 to-yellow-600 text-white py-2 sm:py-3 px-3 sm:px-5 rounded sm:text-xl font-bold font-['Inter']">
-                            Update Recipe Details
+                            {buttonStatus ? (
+                                <span className='loading loading-spinner w-7 text-white'></span>
+                            ) : (
+                                'Update Recipe Details'
+                            )}
                         </button>
                     </div>
                 ) : (
@@ -102,7 +106,7 @@ const MenuItemForm = ({
                             <span className='loading loading-spinner w-7 text-white'></span>
                         ) : (
                             'Add Item'
-                        )}{' '}
+                        )}
                         <IoRestaurant />
                     </button>
                 )}

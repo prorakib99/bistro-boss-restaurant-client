@@ -1,15 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from 'react';
 import MenuItem from '../../Shared/MenuItem/MenuItem';
 import SectionTitles from '../../Shared/SectionTitles/SectionTitles';
 import MoreButton from '../../Shared/MoreButton/MoreButton';
 import { useFoods } from '../../../hooks/useFoods';
 import { useFoodCount } from '../../../hooks/useFoodsCount';
+import { useEffect } from 'react';
 
 const OurMenuOne = () => {
     const [foodsLimit, setFoodsLimit] = useState(6);
-    const [foods, isLoading] = useFoods(foodsLimit);
+    const [foods, isLoading, refetch] = useFoods(foodsLimit);
     const [totalFoods] = useFoodCount();
     const [isDisabled, setIsDisabled] = useState(false);
+
+    useEffect(() => {
+        refetch();
+    }, [foodsLimit]);
 
     const handleLoadMore = () => {
         if (totalFoods <= foodsLimit) {
