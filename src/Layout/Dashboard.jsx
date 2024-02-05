@@ -1,12 +1,16 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import LeftNavigation from '../pages/Dashboard/Users/LeftNavigation/LeftNavigation';
 import { useEffect } from 'react';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
+    // const [isAdmin] = useAdmin();
     const location = useLocation();
     const navigate = useNavigate();
 
-    const isAdmin = false;
+    // const isAdmin = true;
+
+    const [isAdmin] = useAdmin();
 
     useEffect(() => {
         if (location.pathname === '/dashboard' || location.pathname === '/dashboard/') {

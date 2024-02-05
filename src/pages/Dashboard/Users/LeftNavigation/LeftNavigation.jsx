@@ -1,5 +1,5 @@
 import { ImHome } from 'react-icons/im';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FaCalendarAlt, FaUsers, FaWallet } from 'react-icons/fa';
 import { IoCartSharp, IoRestaurant } from 'react-icons/io5';
 import { MdEmail, MdRateReview } from 'react-icons/md';
@@ -120,12 +120,14 @@ const LeftNavigation = ({ isAdmin }) => {
                         </div>
                     </div>
                     <div className='hidden lg:block'>
-                        <h2 className="text-neutral-900 text-2xl font-black font-['Cinzel']">
-                            BISTRO BOSS
-                        </h2>
-                        <h4 className="text-neutral-900 text-lg font-bold font-['Cinzel'] tracking-[6.65px]">
-                            Restaurant
-                        </h4>
+                        <Link to='/'>
+                            <h2 className="text-neutral-900 text-2xl font-black font-['Cinzel']">
+                                BISTRO BOSS
+                            </h2>
+                            <h4 className="text-neutral-900 text-lg font-bold font-['Cinzel'] tracking-[6.65px]">
+                                Restaurant
+                            </h4>
+                        </Link>
                     </div>
                 </div>
                 <div className='pt-[50px]'>
