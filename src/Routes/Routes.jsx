@@ -18,6 +18,7 @@ import AddItems from '../pages/Dashboard/Admin/AddItems/AddItems';
 import ManageItems from '../pages/Dashboard/Admin/ManageItems/ManageItems';
 import ManageBookings from '../pages/Dashboard/Admin/ManageBookings/ManageBookings';
 import AllUsers from '../pages/Dashboard/Admin/AllUsers/AllUsers';
+import PrivateRoute from '../providers/PrivateRoute';
 
 export const router = createBrowserRouter([
     {
@@ -52,7 +53,11 @@ export const router = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <Dashboard />,
+        element: (
+            <PrivateRoute>
+                <Dashboard />
+            </PrivateRoute>
+        ),
         children: [
             {
                 path: 'home',
