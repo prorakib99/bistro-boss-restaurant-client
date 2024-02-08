@@ -6,6 +6,7 @@ import SectionTitles from '../../../Shared/SectionTitles/SectionTitles';
 import { useQuery } from 'react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import DashboardTable from '../Shared/DashboardTable/DashboardTable';
+import { Helmet } from 'react-helmet-async';
 
 const AllUsers = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -106,6 +107,9 @@ const AllUsers = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Admin || Manage All Users</title>
+            </Helmet>
             {/* section Title */}
             <SectionTitles subTitle='How many??' title='MANAGE ALL USERS' />
 

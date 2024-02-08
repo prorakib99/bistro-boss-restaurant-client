@@ -79,6 +79,8 @@ const ManageItems = () => {
                         if (res.data.deletedCount > 0) {
                             refetch();
                             toast.success('Successfully Deleted');
+                        } else {
+                            toast.error('Something Wrong Try Later');
                         }
                     });
                 }

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import MenuItemForm from '../Shared/MenuItemForm/MenuItemForm';
 import { useState } from 'react';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const UpdateItems = () => {
     const [btnStatus, setBtnStatus] = useState(false);
@@ -33,6 +34,9 @@ const UpdateItems = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Admin || Update Items</title>
+            </Helmet>
             <h2 className="text-center text-neutral-900 text-[40px] font-normal font-['Inter']">
                 UPDATE ITEM
             </h2>
