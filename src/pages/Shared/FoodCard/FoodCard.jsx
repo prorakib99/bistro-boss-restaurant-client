@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import useCart from '../../../hooks/useCart';
+import hotToast from 'react-hot-toast';
 
 const FoodCard = ({ food, shop }) => {
     const { recipe, price, name, image } = food;
@@ -34,7 +34,7 @@ const FoodCard = ({ food, shop }) => {
                 .then((data) => {
                     if (data.acknowledged) {
                         refetch();
-                        toast.success('Food Successfully Added to Cart ');
+                        hotToast.success('Successfully Added to Cart ');
                     }
                 });
         } else {

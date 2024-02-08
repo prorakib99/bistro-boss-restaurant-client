@@ -14,6 +14,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Helmet } from 'react-helmet-async';
+import hotToast from 'react-hot-toast';
 
 const Login = () => {
     const [show, setShow] = useState(false);
@@ -42,12 +43,12 @@ const Login = () => {
         if (inputText.length < 6) {
             return alert('Enter Captcha Text First');
         } else if (validateCaptcha(inputText) === true) {
-            toast.success('Captcha Successfully Matched');
+            hotToast.success('Captcha Successfully Matched');
             setIsDisabled(false);
             setCaptchaStatus(true);
         } else {
             setCaptchaStatus(false);
-            toast.error('Wrong Captcha Input');
+            hotToast.error('Wrong Captcha Input');
             captchaRef.current.value = '';
         }
     };

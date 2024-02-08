@@ -9,6 +9,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import AuthProvider from './providers/AuthProvider.jsx';
 import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <HelmetProvider>
                 <ChakraProvider>
                     <QueryClientProvider client={queryClient}>
+                        <Toaster position='top-center' reverseOrder={false} />
                         <ToastContainer
                             position='top-right'
                             autoClose={5000}
