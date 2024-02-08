@@ -115,7 +115,10 @@ const MyCarts = () => {
                                 <h2 className="text-neutral-900 text-xl md:text-[32px] font-bold font-['Cinzel']">
                                     total price: ${totalPrice}
                                 </h2>
-                                <Link className="px-[17px] py-3 bg-[#D1A054] rounded-lg justify-start items-start gap-2.5 inline-flex text-white text-base sm:text-xl font-bold font-['Cinzel']">
+                                <Link
+                                    to='/dashboard/payment'
+                                    className="px-[17px] py-3 bg-[#D1A054] rounded-lg justify-start items-start gap-2.5 inline-flex text-white text-base sm:text-xl font-bold font-['Cinzel']"
+                                >
                                     Pay
                                 </Link>
                             </div>

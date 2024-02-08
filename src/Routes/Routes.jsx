@@ -21,6 +21,7 @@ import AllUsers from '../pages/Dashboard/Admin/AllUsers/AllUsers';
 import PrivateRoute from '../providers/PrivateRoute';
 import AdminRoute from '../providers/AdminRoute';
 import UpdateItems from '../pages/Dashboard/Admin/UpdateItems/UpdateItems';
+import Payments from '../pages/Dashboard/Users/Payments/Payments';
 
 export const router = createBrowserRouter([
     {
@@ -85,6 +86,11 @@ export const router = createBrowserRouter([
                 path: 'booking',
                 element: <MyBookings />
             },
+            {
+                path: 'payment',
+                element: <Payments />
+            },
+            // Admin Only Routes
             {
                 path: 'admin/home',
                 element: (
