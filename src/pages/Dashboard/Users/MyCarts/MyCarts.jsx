@@ -94,7 +94,7 @@ const MyCarts = () => {
         <div className='container mx-auto'>
             {/* Helmet */}
             <Helmet>
-                <title>Bistro Boss | Dashboard | Cart</title>
+                <title>Bistro Boss || Dashboard Cart</title>
             </Helmet>
 
             {/* Section Title */}

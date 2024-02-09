@@ -6,6 +6,7 @@ import { Spinner } from '@chakra-ui/react';
 import useAxiosSecure from '../../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../../hooks/useAuth';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = ({ cart, price }) => {
     const [axiosSecure] = useAxiosSecure();
@@ -14,6 +15,7 @@ const CheckoutForm = ({ cart, price }) => {
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (price > 0) {
@@ -80,6 +82,7 @@ const CheckoutForm = ({ cart, price }) => {
             axiosSecure.post('/payments', payment).then((res) => {
                 if (res.data.insertResult.insertedId) {
                     toast.success('Payment Successful');
+                    navigate('/dashboard/history');
                 }
             });
         }
