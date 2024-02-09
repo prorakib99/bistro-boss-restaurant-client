@@ -19,9 +19,11 @@ const MyCarts = () => {
         return <Loader height='h-full' width='w-full' />;
     }
 
-    const totalPrice = cart.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.price;
-    }, 0);
+    const totalPrice = cart
+        .reduce((accumulator, currentValue) => {
+            return accumulator + currentValue.price;
+        }, 0)
+        .toFixed(2);
 
     const handleDelete = (item) => {
         swal({

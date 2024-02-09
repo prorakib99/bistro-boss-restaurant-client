@@ -8,16 +8,17 @@ import { TiShoppingCart } from 'react-icons/ti';
 import { Badge } from 'primereact/badge';
 import { AuthContext } from '../../../providers/AuthProvider';
 import useCart from '../../../hooks/useCart';
+import useAdmin from '../../../hooks/useAdmin';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
-
+    const [isAdmin] = useAdmin();
     const [cart] = useCart();
 
     const navigation = [
         { name: 'Home', to: '/' },
         { name: 'Contact Us', to: '/contact' },
-        { name: 'Dashboard', to: '/dashboard' },
+        { name: 'Dashboard', to: `${isAdmin ? '/dashboard/admin/home' : '/dashboard/home'}` },
         { name: 'Our Menu', to: '/menu' },
         { name: 'Our Shop', to: '/shop/salad' }
     ];
