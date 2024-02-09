@@ -8,10 +8,11 @@ import { Calendar } from 'primereact/calendar';
 import { Input, Select } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import moment from 'moment';
-import swal from 'sweetalert';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
 import { Helmet } from 'react-helmet-async';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Reservation = () => {
     const {
@@ -23,6 +24,7 @@ const Reservation = () => {
 
     const [axiosSecure] = useAxiosSecure();
     const { user } = useAuth();
+    const navigate = useNavigate();
 
     const [date, setDate] = useState(null);
     const [time, setTime] = useState(null);
@@ -39,7 +41,9 @@ const Reservation = () => {
             phone: phone,
             guest: parseInt(guest),
             date: formateDate,
-            time: formateTime
+            time: formateTime,
+            submitAt: moment().format('dddd, MMMM D, YYYY, h:mm:ss a'),
+            bookingStatus: 'pending'
         };
 
         axiosSecure.post('/bookings', newItem).then((res) => {
@@ -47,7 +51,8 @@ const Reservation = () => {
                 reset();
                 setDate(null);
                 setTime(null);
-                swal('Booking Add SuccessFull', '', 'success');
+                toast.success('Booking Successfully Submitted');
+                navigate('/dashboard/booking');
             }
         });
     };
