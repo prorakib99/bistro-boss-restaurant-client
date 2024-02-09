@@ -5,10 +5,12 @@ import swal from 'sweetalert';
 import SectionTitles from '../../../Shared/SectionTitles/SectionTitles';
 import { useQuery } from 'react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import DashboardTable from '../Shared/DashboardTable/DashboardTable';
 import { Helmet } from 'react-helmet-async';
+import useAuth from '../../../../hooks/useAuth';
+import DashboardTable from '../../Shared/DashboardTable/DashBoardTable';
 
 const AllUsers = () => {
+    const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure();
     const { data: users = [], refetch } = useQuery(['users'], async () => {
         const res = await axiosSecure.get('/users');
@@ -97,9 +99,13 @@ const AllUsers = () => {
         );
     };
 
-    const actionBodyTemplate = (user) => {
+    const actionBodyTemplate = (users) => {
         return (
-            <button onClick={() => handleDeleteUser(user)} className='p-3 rounded bg-[#B91C1C]'>
+            <button
+                disabled={users.email === user.email}
+                onClick={() => handleDeleteUser(users)}
+                className='p-3 rounded disabled:bg-slate-400 bg-[#B91C1C]'
+            >
                 <FaRegTrashAlt className='text-2xl text-white' />
             </button>
         );

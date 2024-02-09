@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import SectionTitles from '../../../Shared/SectionTitles/SectionTitles';
 import { Helmet } from 'react-helmet-async';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import DashboardTable from '../Shared/DashboardTable/DashboardTable';
 import { toast } from 'react-toastify';
+import DashboardTable from '../../Shared/DashboardTable/DashBoardTable';
 
 const ManageItems = () => {
     const [axiosSecure] = useAxiosSecure();
