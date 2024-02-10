@@ -29,6 +29,7 @@ const AddReview = () => {
             const { recipe, suggestion, details } = item;
             const newReview = {
                 name: user?.displayName,
+                email: user?.email,
                 recipe,
                 suggestion,
                 details,

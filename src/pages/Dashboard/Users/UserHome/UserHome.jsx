@@ -3,11 +3,24 @@ import useAuth from '../../../../hooks/useAuth';
 import walletImg from '../../../../assets/dashboard/AdminHome/wallet.svg';
 import telephoneImg from '../../../../assets/dashboard/UserHome/telephone.svg';
 import storeImg from '../../../../assets/dashboard/UserHome/store.svg';
-import { IoCart } from 'react-icons/io5';
+// import { IoCart } from 'react-icons/io5';
 import { FaRegCalendarAlt, FaStar, FaWallet } from 'react-icons/fa';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import { useQuery } from 'react-query';
+import useCart from '../../../../hooks/useCart';
 
 const UserHome = () => {
     const { user } = useAuth();
+    const [axiosSecure] = useAxiosSecure();
+    const [cart] = useCart();
+
+    const { data: userStats = {} } = useQuery({
+        queryKey: ['user-stats'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/user-stats?email=${user?.email}`);
+            return res.data;
+        }
+    });
     return (
         <>
             {/* Helmet */}
@@ -25,7 +38,7 @@ const UserHome = () => {
                     <img src={walletImg} alt='' />
                     <div className='flex flex-col'>
                         <h2 className="text-white text-[30px] sm:text-[40px] font-extrabold font-['Inter']">
-                            ${0}
+                            ${userStats.purchased || 0}
                         </h2>
                         <h6 className="text-white text-xl sm:text-2xl font-normal font-['Inter']">
                             Purchased
@@ -36,7 +49,7 @@ const UserHome = () => {
                     <img src={storeImg} alt='' />
                     <div className='flex flex-col'>
                         <h2 className="text-white text-[30px] sm:text-[40px] font-extrabold font-['Inter']">
-                            {0}
+                            {cart?.length || 0}
                         </h2>
                         <h6 className="text-white text-xl sm:text-2xl font-normal font-['Inter']">
                             Cart
@@ -86,21 +99,21 @@ const UserHome = () => {
                     </h1>
                     <div className='pt-5'>
                         <ul className='flex flex-col gap-2'>
-                            <li className="text-sky-500 text-2xl font-semibold font-['Cinzel'] flex items-center gap-2">
+                            {/* <li className="text-sky-500 text-2xl font-semibold font-['Cinzel'] flex items-center gap-2">
                                 <IoCart />
                                 Orders: {0}
-                            </li>
+                            </li> */}
                             <li className="text-teal-500 text-2xl font-semibold font-['Cinzel'] flex items-center gap-2">
                                 <FaStar />
-                                Reviews: {0}
+                                Reviews: {userStats?.reviews || 0}
                             </li>
                             <li className="text-amber-400 text-2xl font-semibold font-['Cinzel'] flex items-center gap-2">
                                 <FaRegCalendarAlt />
-                                Bookings: {0}
+                                Bookings: {userStats?.bookings || 0}
                             </li>
                             <li className="text-orange-400 text-2xl font-semibold font-['Cinzel'] flex items-center gap-2">
                                 <FaWallet />
-                                Payment: {0}
+                                Payment: {userStats?.payments || 0}
                             </li>
                         </ul>
                     </div>
