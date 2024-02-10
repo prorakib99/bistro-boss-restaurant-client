@@ -40,7 +40,7 @@ const Testimonials = () => {
                                 <div className='sm:mb-2'>
                                     <img className='w-12 md:w-auto' src={quoteLeft} alt='' />
                                 </div>
-                                <p className="text-center px-7 sm:px-10 text-neutral-700 text-base sm:text-xl font-normal font-['Inter'] leading-[35px]">
+                                <p className="text-center w-5/6 px-6 sm:px-10 text-neutral-700 text-base sm:text-xl font-normal font-['Inter'] leading-[35px]">
                                     {review.details}
                                 </p>
                                 <h2 className="text-center text-yellow-600 text-[25px] sm:text-[32px] font-medium font-['Inter']">
