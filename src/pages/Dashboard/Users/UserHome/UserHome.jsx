@@ -8,19 +8,24 @@ import { FaRegCalendarAlt, FaStar, FaWallet } from 'react-icons/fa';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from 'react-query';
 import useCart from '../../../../hooks/useCart';
+import Loader from '../../../Shared/Loader/Loader';
 
 const UserHome = () => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     const [axiosSecure] = useAxiosSecure();
     const [cart] = useCart();
 
-    const { data: userStats = {} } = useQuery({
+    const { data: userStats = {}, isLoading } = useQuery({
         queryKey: ['user-stats'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/user-stats?email=${user?.email}`);
             return res.data;
         }
     });
+
+    if (isLoading || loading) {
+        return <Loader height='h-full' width='w-full' />;
+    }
     return (
         <>
             {/* Helmet */}

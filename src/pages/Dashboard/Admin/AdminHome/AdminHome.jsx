@@ -6,11 +6,14 @@ import { useQuery } from 'react-query';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import AdminBarChart from './Charts/BarChart/AdminBarChart';
 import AdminPieChart from './Charts/PieChart/AdminPieChart';
+import useAuth from '../../../../hooks/useAuth';
+import Loader from '../../../Shared/Loader/Loader';
 
 const AdminHome = () => {
     const [axiosSecure] = useAxiosSecure();
+    const { loading } = useAuth();
 
-    const { data: stats = {} } = useQuery({
+    const { data: stats = {}, isLoading } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
             const res = await axiosSecure('/admin-stats');
@@ -19,13 +22,17 @@ const AdminHome = () => {
         }
     });
 
-    const { data: chartData = [] } = useQuery({
+    const { data: chartData = [], isLoading: chartLoading } = useQuery({
         queryKey: ['chart-data'],
         queryFn: async () => {
             const res = await axiosSecure('/order-stats');
             return res.data;
         }
     });
+
+    if (isLoading || chartLoading || loading) {
+        return <Loader height='h-full' width='w-full' />;
+    }
 
     return (
         <div>

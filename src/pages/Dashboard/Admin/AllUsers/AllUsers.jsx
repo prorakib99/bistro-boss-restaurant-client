@@ -8,14 +8,23 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../../hooks/useAuth';
 import DashboardTable from '../../Shared/DashboardTable/DashBoardTable';
+import Loader from '../../../Shared/Loader/Loader';
 
 const AllUsers = () => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     const [axiosSecure] = useAxiosSecure();
-    const { data: users = [], refetch } = useQuery(['users'], async () => {
+    const {
+        data: users = [],
+        refetch,
+        isLoading
+    } = useQuery(['users'], async () => {
         const res = await axiosSecure.get('/users');
         return res.data;
     });
+
+    if (isLoading || loading) {
+        return <Loader height='h-full' width='w-full' />;
+    }
 
     // Handle Admin Role
     const handleAdminRole = (user) => {

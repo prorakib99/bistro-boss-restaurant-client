@@ -4,17 +4,28 @@ import swal from 'sweetalert';
 import SectionTitles from '../../../Shared/SectionTitles/SectionTitles';
 import DashboardTable from '../../Shared/DashboardTable/DashBoardTable';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import Loader from '../../../Shared/Loader/Loader';
+import useAuth from '../../../../hooks/useAuth';
 
 const ManageBookings = () => {
     const [axiosSecure] = useAxiosSecure();
+    const { loading } = useAuth();
 
-    const { data: bookings = [], refetch } = useQuery({
+    const {
+        data: bookings = [],
+        refetch,
+        isLoading
+    } = useQuery({
         queryKey: ['manage-bookings'],
         queryFn: async () => {
             const res = await axiosSecure.get('/bookings');
             return res.data;
         }
     });
+
+    if (isLoading || loading) {
+        return <Loader height='h-full' width='w-full' />;
+    }
 
     const emailBodyTemplate = (item, index) => {
         return (

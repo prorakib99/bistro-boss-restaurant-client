@@ -51,7 +51,7 @@ const Banner = () => {
         >
             {sliders.map((slider) => (
                 <div key={slider.id}>
-                    <img className='xl:h-[90vh]' src={slider.img} />
+                    <img className='xl:h-[90vh] lg:h-[85vh] md:h-[70] h-[50vh]' src={slider.img} />
                 </div>
             ))}
         </Carousel>

@@ -5,18 +5,23 @@ import { Helmet } from 'react-helmet-async';
 import SectionTitles from '../../../Shared/SectionTitles/SectionTitles';
 import DashboardTable from '../../Shared/DashboardTable/DashBoardTable';
 import moment from 'moment';
+import Loader from '../../../Shared/Loader/Loader';
 
 const PaymentHistory = () => {
     const [axiosSecure] = useAxiosSecure();
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
-    const { data: paymentHistory = [] } = useQuery({
+    const { data: paymentHistory = [], isLoading } = useQuery({
         queryKey: ['payment-history'],
         queryFn: async () => {
             const res = await axiosSecure(`/payments?email=${user?.email}`);
             return res.data;
         }
     });
+
+    if (isLoading || loading) {
+        return <Loader height='h-full' width='w-full' />;
+    }
 
     const emailBodyTemp = (item) => {
         return (
@@ -73,7 +78,7 @@ const PaymentHistory = () => {
                 </h3>
             ) : (
                 <section className='py-10 md:px-10'>
-                    <h2 className="text-neutral-900 mb-4 text-[32px] font-bold font-['Cinzel']">
+                    <h2 className="text-neutral-900 mb-4 text-2xl md:text-[32px] font-bold font-['Cinzel']">
                         Total Payments: {paymentHistory?.length}
                     </h2>
                     <div>

@@ -6,18 +6,27 @@ import swal from 'sweetalert';
 import { Helmet } from 'react-helmet-async';
 import SectionTitles from '../../../Shared/SectionTitles/SectionTitles';
 import DashboardTable from '../../Shared/DashboardTable/DashBoardTable';
+import Loader from '../../../Shared/Loader/Loader';
 
 const MyBookings = () => {
     const [axiosSecure] = useAxiosSecure();
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
-    const { data: myBookings = [], refetch } = useQuery({
+    const {
+        data: myBookings = [],
+        refetch,
+        isLoading
+    } = useQuery({
         queryKey: ['user-bookings'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/user-bookings?email=${user?.email}`);
             return res.data;
         }
     });
+
+    if (isLoading || loading) {
+        return <Loader height='h-full' width='w-full' />;
+    }
 
     const nameBodyTemp = (item, index) => {
         return (

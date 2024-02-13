@@ -14,7 +14,6 @@ const MyCarts = () => {
     const [cart, refetch, isLoading] = useCart();
     const { loading } = useAuth();
 
-    console.log(cart);
     if (isLoading || loading) {
         return <Loader height='h-full' width='w-full' />;
     }

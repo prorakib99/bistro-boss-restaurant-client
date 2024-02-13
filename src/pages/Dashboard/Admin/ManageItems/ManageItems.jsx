@@ -7,17 +7,28 @@ import { Helmet } from 'react-helmet-async';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 import DashboardTable from '../../Shared/DashboardTable/DashBoardTable';
+import Loader from '../../../Shared/Loader/Loader';
+import useAuth from '../../../../hooks/useAuth';
 
 const ManageItems = () => {
     const [axiosSecure] = useAxiosSecure();
+    const { loading } = useAuth();
 
-    const { data: menu = [], refetch } = useQuery({
+    const {
+        data: menu = [],
+        refetch,
+        isLoading
+    } = useQuery({
         queryKey: ['menu'],
         queryFn: async () => {
             const res = await fetch('https://bistro-boss-restaurant-server-zeta.vercel.app/foods');
             return res.json();
         }
     });
+
+    if (isLoading || loading) {
+        return <Loader height='h-full' width='w-full' />;
+    }
 
     const imageBodyTemplate = (food, index) => {
         return (
