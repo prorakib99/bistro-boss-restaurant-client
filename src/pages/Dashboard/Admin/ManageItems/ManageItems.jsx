@@ -14,7 +14,7 @@ const ManageItems = () => {
     const { data: menu = [], refetch } = useQuery({
         queryKey: ['menu'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/foods');
+            const res = await fetch('https://bistro-boss-restaurant-server-zeta.vercel.app/foods');
             return res.json();
         }
     });

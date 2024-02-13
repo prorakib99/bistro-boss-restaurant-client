@@ -8,7 +8,11 @@ export const useFoods = (limit) => {
     } = useQuery({
         queryKey: ['menu'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/foods${limit ? `?page=${limit}` : ''}`);
+            const res = await fetch(
+                `https://bistro-boss-restaurant-server-zeta.vercel.app/foods${
+                    limit ? `?page=${limit}` : ''
+                }`
+            );
             return res.json();
         }
     });

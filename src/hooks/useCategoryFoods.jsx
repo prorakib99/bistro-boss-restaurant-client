@@ -6,9 +6,9 @@ export const useCategoryFoods = (categoryName, limit, page) => {
 
     useEffect(() => {
         fetch(
-            `http://localhost:5000/category?name=${categoryName}${limit ? `&limit=${limit}` : ''}${
-                page ? `&page=${page}` : ''
-            }`
+            `https://bistro-boss-restaurant-server-zeta.vercel.app/category?name=${categoryName}${
+                limit ? `&limit=${limit}` : ''
+            }${page ? `&page=${page}` : ''}`
         )
             .then((res) => res.json())
             .then((data) => {

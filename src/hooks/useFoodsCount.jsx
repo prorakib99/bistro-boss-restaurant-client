@@ -5,7 +5,7 @@ export const useFoodCount = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/total`)
+        fetch(`https://bistro-boss-restaurant-server-zeta.vercel.app/total`)
             .then((res) => res.json())
             .then((data) => {
                 setTotal(data.result);

@@ -22,11 +22,13 @@ import PrivateRoute from '../providers/PrivateRoute';
 import AdminRoute from '../providers/AdminRoute';
 import UpdateItems from '../pages/Dashboard/Admin/UpdateItems/UpdateItems';
 import Payments from '../pages/Dashboard/Users/Payments/Payments';
+import NotFound from '../pages/NotFound/NotFound';
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main />,
+        errorElement: <NotFound />,
         children: [
             {
                 path: '/',
@@ -56,6 +58,7 @@ export const router = createBrowserRouter([
     },
     {
         path: 'dashboard',
+        errorElement: <NotFound />,
         element: (
             <PrivateRoute>
                 <Dashboard />
@@ -130,7 +133,10 @@ export const router = createBrowserRouter([
                         <UpdateItems />
                     </AdminRoute>
                 ),
-                loader: ({ params }) => fetch(`http://localhost:5000/foods/${params.id}`)
+                loader: ({ params }) =>
+                    fetch(
+                        `https://bistro-boss-restaurant-server-zeta.vercel.app/foods/${params.id}`
+                    )
             },
             {
                 path: 'admin/allUsers',

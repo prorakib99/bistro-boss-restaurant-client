@@ -34,7 +34,7 @@ const MyCarts = () => {
             dangerMode: true
         }).then((willDelete) => {
             if (willDelete) {
-                fetch(`http://localhost:5000/carts/${item._id}`, {
+                fetch(`https://bistro-boss-restaurant-server-zeta.vercel.app/carts/${item._id}`, {
                     method: 'DELETE'
                 })
                     .then((res) => res.json())
